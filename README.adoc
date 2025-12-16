@@ -1,79 +1,80 @@
 = terrapin-ssg
 :toc: auto
-:toclevels: 3
+:toclevels: 2
 
-**The definitive Logo static site generator.**
+image:https://img.shields.io/badge/RSR-compliant-gold[RSR Compliant,link=https://github.com/hyperpolymath/rhodium-standard-repositories]
+image:https://img.shields.io/badge/poly--ssg-satellite-blue[poly-ssg,link=https://github.com/hyperpolymath/poly-ssg]
+image:https://img.shields.io/badge/license-AGPL--3.0-green[License]
 
-== Overview
+**Educational static site generator in Logo.**
 
-terrapin-ssg is an educational static site generator written in Logo.
-It uses turtle graphics to generate SVG artwork for site content,
-making programming visual and accessible.
+Learn programming while building websites. The turtle draws your layouts.
 
-== Language Enforcement
+== Who Is This For?
 
-[IMPORTANT]
-====
-This SSG **MUST** be written in Logo. No exceptions.
+* **Logo programmers** returning to a beloved language
+* **Educators** teaching programming concepts visually
+* **Anyone learning to code** who wants practical projects
+* **Nostalgic developers** from the Apple II era
 
-Forbidden languages for SSG logic:
+== Why terrapin-ssg?
 
-* Python
-* JavaScript/TypeScript
-* Scratch (use Logo)
-* Any language other than Logo
+=== Visual Programming
 
-The **ONLY** non-Logo code allowed is the ReScript MCP adapter in `adapters/`.
-====
+Watch the turtle draw your site layouts. Abstract concepts become tangible patterns.
 
-== Features
+=== Beginner-Friendly Syntax
 
-* Turtle graphics for SVG generation
-* Educational, beginner-friendly syntax
-* Recursive procedures for complex patterns
-* Interactive REPL for design exploration
-* Generative art capabilities
+Commands read like instructions: FORWARD 100, RIGHT 90. No cryptic syntax to decode.
 
-== Requirements
+=== Recursive Design
 
-* UCBLogo (Berkeley Logo)
+Logo's recursive procedures naturally create complex, beautiful patterns from simple rules.
 
-== Building
+=== Generative Art
 
-[source,bash]
-----
-logo src/terrapin-ssg.logo
-----
+Every page can include unique turtle-generated SVG artwork. Your site literally draws itself.
 
-== Logo Commands
+== Quick Start
 
 [source,logo]
 ----
-; Basic turtle commands
-forward 100     ; Move forward 100 units
-right 90        ; Turn right 90 degrees
-penup           ; Stop drawing
-pendown         ; Start drawing
-repeat 4 [forward 50 right 90]  ; Draw a square
+; terrapin-ssg example
+TO BUILD.SITE
+  SITE "My First Site
+  OUTDIR "_site
+
+  PAGE "index "Welcome [
+    REPEAT 4 [FORWARD 100 RIGHT 90]
+  ]
+
+  BUILD
+END
+
+BUILD.SITE
 ----
 
-== Project Structure
+[source,bash]
+----
+# Run with UCBLogo
+logo src/terrapin-ssg.logo
+----
 
-[source]
-----
-terrapin-ssg/
-├── src/                  # Logo source (THE SSG)
-│   └── terrapin-ssg.logo
-├── adapters/             # ReScript MCP adapter only
-├── STATE.scm             # Project state
-├── ECOSYSTEM.scm         # Ecosystem position
-├── META.scm              # Architecture decisions
-└── .claude/CLAUDE.md     # AI guidelines
-----
+== Features
+
+* **Turtle graphics to SVG** - procedural art in every page
+* **Interactive REPL** - experiment with designs
+* **Recursive patterns** - L-systems and fractals
+* **Simple syntax** - accessible to beginners
+* **Visual feedback** - see what you're building
+
+== Requirements
+
+* UCBLogo (Berkeley Logo) or compatible interpreter
 
 == Part of poly-ssg
 
-terrapin-ssg is a satellite of the https://github.com/hyperpolymath/poly-ssg-mcp[poly-ssg-mcp] hub.
+terrapin-ssg is part of the https://github.com/hyperpolymath/poly-ssg[poly-ssg] family, unified through https://github.com/hyperpolymath/poly-ssg-mcp[MCP integration].
 
 == License
 
