@@ -1,1 +1,80 @@
+= terrapin-ssg
+:toc: auto
+:toclevels: 3
 
+**The definitive Logo static site generator.**
+
+== Overview
+
+terrapin-ssg is an educational static site generator written in Logo.
+It uses turtle graphics to generate SVG artwork for site content,
+making programming visual and accessible.
+
+== Language Enforcement
+
+[IMPORTANT]
+====
+This SSG **MUST** be written in Logo. No exceptions.
+
+Forbidden languages for SSG logic:
+
+* Python
+* JavaScript/TypeScript
+* Scratch (use Logo)
+* Any language other than Logo
+
+The **ONLY** non-Logo code allowed is the ReScript MCP adapter in `adapters/`.
+====
+
+== Features
+
+* Turtle graphics for SVG generation
+* Educational, beginner-friendly syntax
+* Recursive procedures for complex patterns
+* Interactive REPL for design exploration
+* Generative art capabilities
+
+== Requirements
+
+* UCBLogo (Berkeley Logo)
+
+== Building
+
+[source,bash]
+----
+logo src/terrapin-ssg.logo
+----
+
+== Logo Commands
+
+[source,logo]
+----
+; Basic turtle commands
+forward 100     ; Move forward 100 units
+right 90        ; Turn right 90 degrees
+penup           ; Stop drawing
+pendown         ; Start drawing
+repeat 4 [forward 50 right 90]  ; Draw a square
+----
+
+== Project Structure
+
+[source]
+----
+terrapin-ssg/
+├── src/                  # Logo source (THE SSG)
+│   └── terrapin-ssg.logo
+├── adapters/             # ReScript MCP adapter only
+├── STATE.scm             # Project state
+├── ECOSYSTEM.scm         # Ecosystem position
+├── META.scm              # Architecture decisions
+└── .claude/CLAUDE.md     # AI guidelines
+----
+
+== Part of poly-ssg
+
+terrapin-ssg is a satellite of the https://github.com/hyperpolymath/poly-ssg-mcp[poly-ssg-mcp] hub.
+
+== License
+
+AGPL-3.0-or-later
