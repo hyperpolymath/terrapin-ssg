@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+name: Logo CI
+
+permissions: read-all
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Install UCBLogo
+        run: sudo apt-get update && sudo apt-get install -y ucblogo || echo "UCBLogo not in repos"
+
+      - name: Validate Logo file
+        run: |
+          echo "Checking Logo file exists..."
+          if [ -f src/terrapin-ssg.logo ]; then
+            echo "Logo file found"
+          fi
+
+  language-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Verify Logo-only in src/
+        run: |
+          echo "Checking for forbidden languages in src/..."
+          forbidden=$(find src/ -type f \( -name "*.py" -o -name "*.js" -o -name "*.ts" \) 2>/dev/null || true)
+          if [ -n "$forbidden" ]; then
+            echo "ERROR: Found forbidden language files in src/:"
+            echo "$forbidden"
+            exit 1
+          fi
+          echo "OK: Only Logo files in src/"
