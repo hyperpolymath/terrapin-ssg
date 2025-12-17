@@ -107,7 +107,7 @@ module Adapter = {
         "type": "object",
         "properties": {
           "path": { "type": "string" },
-          "pattern": { "type": "string", "description": "Pattern to draw (spiral, square, star, tree)" }
+          "pattern": { "type": "string", "enum": ["spiral", "square", "star", "tree"], "description": "Pattern to draw (spiral, square, star, tree)" }
         }
       }`),
       execute: (params) => {
@@ -120,13 +120,20 @@ module Adapter = {
             }
           | None => "."
           }
-          let pattern = switch Js.Json.decodeObject(params) {
+          let rawPattern = switch Js.Json.decodeObject(params) {
           | Some(obj) =>
             switch Js.Dict.get(obj, "pattern") {
             | Some(v) => Js.Json.decodeString(v)->Belt.Option.getWithDefault("spiral")
             | None => "spiral"
             }
           | None => "spiral"
+          }
+          // Security: Only allow whitelisted patterns to prevent command injection
+          let allowedPatterns = ["spiral", "square", "star", "tree"]
+          let pattern = if Js.Array.includes(rawPattern, allowedPatterns) {
+            rawPattern
+          } else {
+            "spiral" // Default to safe pattern
           }
           let result = runCommand(`logo -e 'load "src/terrapin-ssg.logo draw_${pattern}'`, ~cwd=Some(path))
           resolve(result)
