@@ -3,8 +3,8 @@
 ;; SPDX-FileCopyrightText: 2025 Jonathan D.A. Jewell
 
 (define metadata
-  '((version . "1.1.0")
-    (updated . "2025-12-22")
+  '((version . "1.0.1")
+    (updated . "2025-12-17")
     (project . "terrapin-ssg")
     (required-language . "Logo")
     (total-components . 44)
@@ -102,10 +102,11 @@
       (provenance ((status . "complete") (location . ".well-known/provenance.json")))))))
 
 (define current-position
-  '((phase . "v1.1.0 - Full 44-Component Status")
+  '((phase . "v1.0.1 - Security Hardening Complete")
     (overall-completion . 100)
-    (language . "Logo")
-    (interpreter . "UCBLogo")))
+    (components ((logo-engine ((status . "complete") (file . "src/terrapin-ssg.logo") (completion . 100)))
+                 (mcp-adapter ((status . "complete") (language . "ReScript") (completion . 100)))
+                 (security ((status . "complete") (completion . 100)))))))
 
 (define blockers-and-issues
   '((critical ())
@@ -118,33 +119,27 @@
 
 (define critical-next-actions
   '((immediate ())
-    (this-week
-     (("Install UCBLogo and test build" . medium)
-      ("Add more turtle patterns" . low)
-      ("Create example sites" . low)))))
+    (this-week (("Add example Logo sites" . medium)
+                ("Test with UCBLogo interpreter" . medium)))))
 
 (define roadmap
   '((v1.0 . "Logo Implementation Complete ✓")
-    (v1.0.1 . "Security Hardening ✓")
-    (v1.1.0 . "44-Component Status + Cookbook ✓ (current)")
-    (v1.2 . "Enhanced Turtle Patterns - fractal tree, koch snowflake, dragon curve")
-    (v1.3 . "Themes System - CSS theme support for generated sites")
-    (v1.4 . "Markdown Integration - Convert markdown alongside turtle graphics")
-    (v2.0 . "Interactive Mode - Live preview in browser")
-    (future . ("Multi-page navigation"
+    (v1.0.1 . "Security Hardening ✓ (current)")
+    (v1.1 . "Enhanced Turtle Patterns - Add more turtle graphics patterns (fractal tree, koch snowflake, dragon curve)")
+    (v1.2 . "Themes System - CSS theme support for generated sites")
+    (v1.3 . "Markdown Integration - Convert markdown content alongside turtle graphics")
+    (v2.0 . "Interactive Mode - Live preview of turtle graphics in browser")
+    (future . ("Multi-page navigation generation"
                "RSS/Atom feed support"
                "Sitemap generation"
-               "GitHub Pages action"
-               "Nickel configuration"))))
+               "Image optimization"
+               "GitHub Pages deployment action"))))
 
 (define session-history
   '((snapshots
-     ((date . "2025-12-22")
-      (session . "44-component-status")
-      (notes . "Applied 44-component structure, created Justfile/Mustfile/cookbook.adoc, enhanced CI/CD"))
      ((date . "2025-12-17")
       (session . "security-review")
-      (notes . "Fixed SECURITY.md, CI SHA-pins, dependabot, command injection"))
+      (notes . "Fixed SECURITY.md placeholders, updated CI SHA-pins, cleaned dependabot.yml, fixed command injection in ReScript adapter."))
      ((date . "2025-12-16")
       (session . "language-fix")
       (notes . "Rewrote from Python to pure Logo")))))
@@ -155,4 +150,4 @@
     (components . "44/44")
     (completion . 100)
     (blockers . 0)
-    (updated . "2025-12-22")))
+    (updated . "2025-12-17")))
