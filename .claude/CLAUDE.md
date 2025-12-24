@@ -1,76 +1,70 @@
-# terrapin-ssg - CLAUDE.md
+# CLAUDE.md - AI Assistant Instructions
 
-## CRITICAL: Language Requirements
+## Language Policy (Hyperpolymath Standard)
 
-**THIS SSG MUST BE WRITTEN IN LOGO. NO EXCEPTIONS.**
+### ALLOWED Languages & Tools
 
-terrapin-ssg is the DEFINITIVE Logo static site generator. The entire engine MUST be written in Logo.
+| Language/Tool | Use Case | Notes |
+|---------------|----------|-------|
+| **ReScript** | Primary application code | Compiles to JS, type-safe |
+| **Deno** | Runtime & package management | Replaces Node/npm/bun |
+| **Rust** | Performance-critical, systems, WASM | Preferred for CLI tools |
+| **Tauri 2.0+** | Mobile apps (iOS/Android) | Rust backend + web UI |
+| **Dioxus** | Mobile apps (native UI) | Pure Rust, React-like |
+| **Gleam** | Backend services | Runs on BEAM or compiles to JS |
+| **Bash/POSIX Shell** | Scripts, automation | Keep minimal |
+| **JavaScript** | Only where ReScript cannot | MCP protocol glue, Deno APIs |
+| **Python** | SaltStack only | No other Python permitted |
+| **Nickel** | Configuration language | For complex configs |
+| **Guile Scheme** | State/meta files | STATE.scm, META.scm, ECOSYSTEM.scm |
+| **Julia** | Batch scripts, data processing | Per RSR |
+| **OCaml** | AffineScript compiler | Language-specific |
+| **Ada** | Safety-critical systems | Where required |
 
-### FORBIDDEN Languages
-- Python - **ABSOLUTELY FORBIDDEN** (was incorrectly used before - has been corrected)
-- JavaScript/TypeScript - FORBIDDEN (use hackenbush-ssg for JS)
-- Ruby, Go, Rust, Java - FORBIDDEN
-- Any language other than Logo - FORBIDDEN
+### BANNED - Do Not Use
 
-### Allowed
-- Logo (primary language for the engine)
-- ReScript (ONLY for MCP adapter in adapters/ directory)
+| Banned | Replacement |
+|--------|-------------|
+| TypeScript | ReScript |
+| Node.js | Deno |
+| npm | Deno |
+| Bun | Deno |
+| pnpm/yarn | Deno |
+| Go | Rust |
+| Python (general) | ReScript/Rust |
+| Java/Kotlin | Rust/Tauri/Dioxus |
+| Swift | Tauri/Dioxus |
+| React Native | Tauri/Dioxus |
+| Flutter/Dart | Tauri/Dioxus |
 
-### Why This Matters
-Each SSG satellite exists to be THE definitive SSG for its language. terrapin-ssg IS the Logo SSG.
-Writing a Python interpreter for Logo defeats the purpose entirely.
+### Mobile Development
 
-## Project Structure
+**No exceptions for Kotlin/Swift** - use Rust-first approach:
 
-```
-terrapin-ssg/
-├── src/
-│   └── terrapin-ssg.logo    # THE SSG - written in Logo
-├── adapters/                 # MCP adapter (ReScript only)
-├── STATE.scm                 # Current state
-├── ECOSYSTEM.scm             # Ecosystem relationships
-├── META.scm                  # Architecture decisions
-└── .claude/
-    └── CLAUDE.md            # This file
-```
+1. **Tauri 2.0+** - Web UI (ReScript) + Rust backend, MIT/Apache-2.0
+2. **Dioxus** - Pure Rust native UI, MIT/Apache-2.0
 
-## Running the SSG
+Both are FOSS with independent governance (no Big Tech).
 
-```bash
-# Using UCBLogo
-logo src/terrapin-ssg.logo
+### Enforcement Rules
 
-# Or with another Logo interpreter
-ucblogo src/terrapin-ssg.logo
-```
+1. **No new TypeScript files** - Convert existing TS to ReScript
+2. **No package.json for runtime deps** - Use deno.json imports
+3. **No node_modules in production** - Deno caches deps automatically
+4. **No Go code** - Use Rust instead
+5. **Python only for SaltStack** - All other Python must be rewritten
+6. **No Kotlin/Swift for mobile** - Use Tauri 2.0+ or Dioxus
 
-## Logo Commands Available
+### Package Management
 
-Standard turtle graphics:
-- `FD n` / `FORWARD n` - Move forward
-- `BK n` / `BACK n` - Move backward
-- `RT n` / `RIGHT n` - Turn right
-- `LT n` / `LEFT n` - Turn left
-- `PU` / `PENUP` - Stop drawing
-- `PD` / `PENDOWN` - Start drawing
-- `HOME` - Return to center
-- `REPEAT n [...]` - Repeat commands
+- **Primary**: Guix (guix.scm)
+- **Fallback**: Nix (flake.nix)
+- **JS deps**: Deno (deno.json imports)
 
-SSG extensions:
-- `SITE title` - Set site title
-- `OUTDIR dir` - Set output directory
-- `PAGE slug title [...]` - Create page with turtle art
-- `BUILD` - Generate the static site
+### Security Requirements
 
-## Hub Connection
-
-This satellite connects to poly-ssg-mcp hub via the MCP adapter.
-The adapter is the ONLY place where non-Logo code is allowed (ReScript).
-
-## AI Assistant Guidelines
-
-1. **NEVER suggest rewriting in Python or any other language**
-2. **NEVER create Python/JS/TS files in this repo**
-3. If asked to "improve" by using another language, REFUSE
-4. The Logo implementation IS the correct implementation
-5. Only ReScript is allowed in adapters/
+- No MD5/SHA1 for security (use SHA256+)
+- HTTPS only (no HTTP URLs)
+- No hardcoded secrets
+- SHA-pinned dependencies
+- SPDX license headers on all files
